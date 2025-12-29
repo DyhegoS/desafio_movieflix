@@ -8,6 +8,12 @@ public class GenreDTO {
     private String name;
 
     public GenreDTO(){
+
+    }
+
+    public GenreDTO(Long id, String name){
+        this.id = id;
+        this.name = name;
     }
 
     public GenreDTO(Genre entity){

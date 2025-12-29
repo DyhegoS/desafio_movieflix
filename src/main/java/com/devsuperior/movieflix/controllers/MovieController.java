@@ -1,6 +1,6 @@
 package com.devsuperior.movieflix.controllers;
 
-import com.devsuperior.movieflix.dto.MovieCardDTO;
+import com.devsuperior.movieflix.dto.MovieDetailsDTO;
 import com.devsuperior.movieflix.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +19,8 @@ public class MovieController {
 
     @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_VISITOR')")
     @GetMapping(value = "/{id}")
-    public ResponseEntity<MovieCardDTO> findById(@PathVariable Long id){
-        MovieCardDTO dto = movieService.findById(id);
+    public ResponseEntity<MovieDetailsDTO> findById(@PathVariable Long id){
+        MovieDetailsDTO dto = movieService.findById(id);
         return ResponseEntity.ok().body(dto);
     }
 }
