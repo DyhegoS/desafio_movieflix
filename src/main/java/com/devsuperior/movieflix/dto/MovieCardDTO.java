@@ -1,5 +1,6 @@
 package com.devsuperior.movieflix.dto;
 
+import com.devsuperior.movieflix.entities.Genre;
 import com.devsuperior.movieflix.entities.Movie;
 
 public class MovieCardDTO {

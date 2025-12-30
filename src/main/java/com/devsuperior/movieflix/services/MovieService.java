@@ -9,6 +9,7 @@ import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,8 +32,12 @@ public class MovieService {
     }
 
     @Transactional(readOnly = true)
-    public Page<MovieCardDTO> findByGenre(Genre genreId, Pageable pageable){
-
-
+    public Page<MovieCardDTO> findByGenre(String genreId, Pageable pageable){
+        if("0".equals(genreId)){
+            Page<Movie> allMovies = movieRepository.findAll(pageable);
+            return allMovies.map(MovieCardDTO::new);
+        }
+        Long id = Long.parseLong(genreId);
+        return movieRepository.searchByGenre(id, pageable);
     }
 }
