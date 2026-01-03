@@ -16,7 +16,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -51,8 +53,18 @@ public class MovieService {
 
     @Transactional(readOnly = true)
     public List<ReviewDTO> findAllReviewsByIdMovie(Long id){
+        Movie movies = new Movie();
+        List<Review> reviews = new ArrayList<>();
 
-        List<Review> list = reviewRepository.findAll();
-        return list.stream().map(x -> new ReviewDTO(x)).collect(Collectors.toList());
+        for(Review r : movies.getReviews()){
+            if(id.equals(movies.getId())){
+                reviews.add(r);
+            }
+        }
+
+        return reviews.stream().map(ReviewDTO::new).collect(Collectors.toList());
+
     }
+
+
 }
